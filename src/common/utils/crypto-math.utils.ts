@@ -10,19 +10,17 @@ export const computePercentage = (
 }
 
 export const computeDenomination = (
-    amount: bigint,
-    decimals = 18,
+    amount: number,
+    decimals = 8,
     fractionDigits: number = 5
 ) => {
     const decimalMultiplier = 10 ** fractionDigits
     const divisor = 10 ** decimals
-    const result = Number(
-        (amount * BigInt(decimalMultiplier)) / BigInt(divisor)
-    )
+    const result = amount * decimalMultiplier / divisor
     return numeral(result / decimalMultiplier).format("0.0a")
 }
 
-export const computeRaw = (amount: number, decimals = 18): bigint => {
+export const computeRaw = (amount: number, decimals = 8): number => {
     const mutiplier = 10 ** decimals
-    return BigInt(amount * mutiplier)
+    return Number.parseInt((amount * mutiplier).toFixed())
 }

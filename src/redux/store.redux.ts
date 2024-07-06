@@ -1,8 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { authReducer, googleOAuth2CallbackReducer } from "./slices"
+import {
+    authReducer,
+    configReducer,
+    googleOAuth2CallbackReducer,
+    homeReducer,
+    postCreateAccountReducer,
+    modalsReducer
+} from "./slices"
 
 export const store = configureStore({
-    reducer: { authReducer, googleOAuth2CallbackReducer },
+    reducer: {
+        authReducer,
+        googleOAuth2CallbackReducer,
+        postCreateAccountReducer,
+        homeReducer,
+        configReducer,
+        modalsReducer
+    },
 })
 
 export type RootState = ReturnType<typeof store.getState>;

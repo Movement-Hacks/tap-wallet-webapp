@@ -1,7 +1,8 @@
-import { Aptos, AptosConfig, EphemeralKeyPair, Network } from "@aptos-labs/ts-sdk"
+import { EphemeralKeyPair, Network } from "@aptos-labs/ts-sdk"
 import { getLocalEphemeralKeyPair, storeEphemeralKeyPair } from "./ephemeral-key-pair.keyless"
 import { OpenIdProvider, providerMap } from "./constants.keyless"
 import { getNonceFromJwt, parseJwtFromUrl } from "./jwt.keyless"
+import { getAptos } from "../constants.aptos"
 
 export const beginKeyless = (
     provider: OpenIdProvider = OpenIdProvider.Google
@@ -22,7 +23,7 @@ export const getKeylessAccount = async (network: Network = Network.DEVNET) => {
     const ephemeralKeyPair = getLocalEphemeralKeyPair(nonce)
     if (!ephemeralKeyPair) throw new Error("Ephemeral key not found.")
 
-    const aptos = new Aptos(new AptosConfig({ network }))
+    const aptos = getAptos(network)
     return await aptos.deriveKeylessAccount({
         jwt,
         ephemeralKeyPair,

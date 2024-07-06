@@ -8,7 +8,7 @@ import {
 } from "../../redux"
 import { Spinner } from "@nextui-org/react"
 import { getKeylessAccount } from "../../features"
-import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 import { useNavigate } from "react-router-dom"
 
 export const GoogleOAuth2CallbackPage = () => {
@@ -49,13 +49,12 @@ export const GoogleOAuth2CallbackPage = () => {
                     })
                 )
             }
-            
         }
         handleEffect()
     }, [dispatch])
 
     useEffect(() => {
-        if (!isValidated) return 
+        if (!isValidated) return
         navigate("/home")
     }, [isValidated, navigate])
 
@@ -63,20 +62,12 @@ export const GoogleOAuth2CallbackPage = () => {
         <div className="fit-container grid place-items-center p-6">
             {isValidating ? (
                 <Spinner label="Validating..." />
-            ) : (
-                isValidated ? (
-                    <div className="grid place-items-center gap-1">
-                        <CheckCircleIcon className="text-primary w-10 h-10"/>
-                        <div className="text-sm">Validated. Redirecting ...</div>
-                    </div>
-                ) : (
-                    <div className="grid place-items-center gap-1">
-                        <ExclamationCircleIcon className="text-primary w-10 h-10"/>
-                        <div className="text-sm">Invalidated. Please try again.</div>
-                    </div>
-                )
-            )     
-            }
+            ) : !isValidated ? (
+                <div className="grid place-items-center gap-1">
+                    <ExclamationCircleIcon className="text-primary w-10 h-10" />
+                    <div className="text-sm">Invalidated. Please try again.</div>
+                </div>
+            ) : null}
         </div>
     )
 }

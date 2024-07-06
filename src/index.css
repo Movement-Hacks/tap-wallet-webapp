@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .container {
-  @apply max-w-[540px] aspect-[9/16]
+  @apply max-w-[450px] aspect-[9/16]
 }
 
 .fit-container {

@@ -1,11 +1,16 @@
 import React from "react"
-import { Link } from "@nextui-org/react"
-import { useAppSelector } from "../../redux"
-import { truncateString } from "../../common"
+import { Navbar } from "./Navbar"
+import { ProfileCard } from "./ProfileCard"
+import { Spacer } from "@nextui-org/react"
+import { AssetsSection } from "./AssetsSection"
 
 export const HomePage = () => {
-    const accountAddress = useAppSelector(state => state.authReducer.accountAddress)
-    return <div className="fit-container p-6">
-        <Link href="" showAnchorIcon isExternal>{truncateString(accountAddress?.toString())}</Link>
+    return <div className="fit-container">
+        <Navbar/>
+        <div className="p-6">
+            <ProfileCard/>
+            <Spacer y={6}/>
+            <AssetsSection/>
+        </div>
     </div>
 }
