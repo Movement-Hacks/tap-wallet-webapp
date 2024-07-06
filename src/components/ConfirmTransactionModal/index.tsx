@@ -79,7 +79,7 @@ export const ConfirmTransactionModal = () => {
                         </Snippet>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="text-sm">Max gas </div>
+                        <div className="text-sm">Max Gas</div>
                         <div className="text-sm font-semibold"> {maxGas} APT</div>
                     </div>
                 </ModalBody>
