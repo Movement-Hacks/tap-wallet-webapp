@@ -1,9 +1,13 @@
 import { Form, Formik, FormikProps } from "formik"
 import React, { ReactNode, createContext, useCallback, useMemo } from "react"
 import * as Yup from "yup"
-import { openConfirmTransactionModal, useAppDispatch, useAppSelector } from "../../redux"
+import {
+    openConfirmTransactionModal,
+    useAppDispatch,
+    useAppSelector,
+} from "../../redux"
 import { getAptos } from "../../features"
-import { computeRaw } from "../../common"
+import { computeDenomination, computeRaw } from "../../common"
 
 export interface FormikValue {
   recipientAddress: string;
@@ -91,17 +95,27 @@ export const TransferModalProvider = ({
                 if (!signer) return
 
                 const functionName = "aptos_account::transfer_coins"
-                const payload = transaction.rawTransaction.payload.bcsToHex().toString()
+                const payload = transaction.rawTransaction.payload
+                    .bcsToHex()
+                    .toString()
                 const signature = signer.signTransaction(transaction).toString()
-  
-                dispatch(openConfirmTransactionModal({
-                    signedTransaction: {
-                        functionName,
-                        payload,
-                        signature,
-                        transaction
-                    }
-                }))
+                const maxGas = computeDenomination(
+                    Number(
+                        transaction.rawTransaction.gas_unit_price *
+              transaction.rawTransaction.max_gas_amount
+                    )
+                )
+                dispatch(
+                    openConfirmTransactionModal({
+                        signedTransaction: {
+                            functionName,
+                            payload,
+                            signature,
+                            transaction,
+                            maxGas
+                        },
+                    })
+                )
             }}
         >
             {(formik) => (

@@ -35,7 +35,7 @@ export const ConfirmTransactionModal = () => {
     )
     const network = useAppSelector((state) => state.configReducer.network)
 
-    const { functionName, payload, signature, transaction } = {
+    const { functionName, payload, signature, transaction, maxGas } = {
         ...signedTransaction,
     }
     const dispatch = useAppDispatch()
@@ -78,12 +78,15 @@ export const ConfirmTransactionModal = () => {
                             {signature}
                         </Snippet>
                     </div>
+                    <div className="flex items-center justify-between">
+                        <div className="text-sm">Max gas </div>
+                        <div className="text-sm font-semibold"> {maxGas} APT</div>
+                    </div>
                 </ModalBody>
                 <ModalFooter className="p-6 pt-0 gap-2">
                     {isSubmitting ? (
                         <Button fullWidth isDisabled isLoading>
-                            {" "}
-              Submitting...{" "}
+              Submitting...
                         </Button>
                     ) : (
                         <>

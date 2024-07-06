@@ -7,6 +7,7 @@ export interface SignedTransaction {
   payload: string;
   signature: string;
   transaction: SimpleTransaction;
+  maxGas: string
 }
 
 interface ModalState {
