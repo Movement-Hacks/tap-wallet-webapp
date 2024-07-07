@@ -8,9 +8,7 @@ const EphemeralKeyPairEncoding = {
     }),
 }
 
-export const encode = (
-    data: unknown
-): string =>
+export const encode = (data: unknown): string =>
     JSON.stringify(data, (_, e) => {
         if (typeof e === "bigint") return { __type: "bigint", value: e.toString() }
         if (e instanceof Uint8Array)
@@ -20,13 +18,11 @@ export const encode = (
         return e
     })
 
-export const decode = <EncodedData> (
-    data: string
-): EncodedData =>
-        JSON.parse(data, (_, e) => {
-            if (e && e.__type === "bigint") return BigInt(e.value)
-            if (e && e.__type === "Uint8Array") return new Uint8Array(e.value)
-            if (e && e.__type === "EphemeralKeyPair")
-                return EphemeralKeyPairEncoding.decode(e)
-            return e
-        })
+export const decode = <EncodedData>(data: string): EncodedData =>
+    JSON.parse(data, (_, e) => {
+        if (e && e.__type === "bigint") return BigInt(e.value)
+        if (e && e.__type === "Uint8Array") return new Uint8Array(e.value)
+        if (e && e.__type === "EphemeralKeyPair")
+            return EphemeralKeyPairEncoding.decode(e)
+        return e
+    })

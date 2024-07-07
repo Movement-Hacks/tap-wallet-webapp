@@ -10,7 +10,7 @@ const initialState: PostCreateAccountState = {
 }
 
 export const postCreateAccountSlice = createSlice({
-    name: "googleOAuth2Callback",
+    name: "postCreateAccount",
     initialState,
     reducers: {
         setMnemonic: (state, action: PayloadAction<{ mnemonic: string }>) => {

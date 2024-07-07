@@ -7,7 +7,7 @@ import {
     Tooltip,
     Spacer,
 } from "@nextui-org/react"
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useAppSelector } from "../../../redux"
 import { truncateString } from "../../../common"
 import { ArrowPathIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline"
 import { Gamepad2Icon } from "lucide-react"
@@ -18,16 +18,21 @@ export const ProfileCard = () => {
     const keylessAccount = useAppSelector(
         (state) => state.authReducer.keylessAccount
     )
-    const accountsWithState = useAppSelector(
-        (state) => state.authReducer.accountsWithState
+    const account = useAppSelector(
+        (state) => state.authReducer.account
+    )
+    const name = useAppSelector(
+        (state) => state.authReducer.name
     )
     const navigate = useNavigate()
 
-    const { accounts, state } = { ...accountsWithState }
-
     const getAddress = () => {
         if (isKeyless) {
+            if (!keylessAccount) return "0x"
             return keylessAccount?.accountAddress.toString()
+        } else {
+            if (!account) return "0x"
+            return account?.accountAddress.toString()
         }
     }
 
@@ -35,7 +40,7 @@ export const ProfileCard = () => {
         <Card shadow="none" className="bg-primary/10">
             <CardBody className="p-4">
                 <div>
-                    <div className="font-bold text-2xl">STARCI</div>
+                    <div className="font-bold text-2xl">{name}</div>
                     <Snippet
                         codeString={getAddress()}
                         className="w-fit"

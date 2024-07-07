@@ -60,15 +60,6 @@ export const ImportWalletPageProvider = ({
                 mnemonic: Yup.string().required("Mnemonic is required"),
             })}
             onSubmit={async ({ mnemonic }) => {
-                const account = Account.fromDerivationPath({
-                    path: "m/44'/637'/0'/0'/0'",
-                    mnemonic,
-                })
-                dispatch(
-                    connect({
-                        account,
-                    })
-                )
                 navigate("/home")
             }}
         >

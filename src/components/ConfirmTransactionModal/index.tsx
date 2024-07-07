@@ -17,7 +17,7 @@ import {
     Snippet,
 } from "@nextui-org/react"
 import { getAptos } from "../../features"
-import { toastTransaction } from "../../App"
+import { toastTransaction } from "../../features"
 
 export const ConfirmTransactionModal = () => {
     const isOpen = useAppSelector(
@@ -120,15 +120,11 @@ export const ConfirmTransactionModal = () => {
                                             transactionHash,
                                         })
                                         toastTransaction({
-                                            isSuccess: true,
                                             network,
                                             transactionHash,
                                         })
                                     } catch (ex) {
-                                        toastTransaction({
-                                            isSuccess: false,
-                                            network,
-                                        })
+                                        //
                                     } finally {
                                         dispatch(
                                             setIsConfirmTransactionModalSubmitting({

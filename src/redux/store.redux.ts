@@ -5,7 +5,7 @@ import {
     googleOAuth2CallbackReducer,
     homeReducer,
     postCreateAccountReducer,
-    modalsReducer
+    modalsReducer,
 } from "./slices"
 
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
         postCreateAccountReducer,
         homeReducer,
         configReducer,
-        modalsReducer
+        modalsReducer,
     },
 })
 

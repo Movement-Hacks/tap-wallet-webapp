@@ -16,6 +16,8 @@ export const TokensTab = () => {
         (state) => state.authReducer.keylessAccount
     )
     const isKeyless = useAppSelector((state) => state.authReducer.isKeyless)
+    const account = useAppSelector((state) => state.authReducer.account)
+
     const network = useAppSelector((state) => state.configReducer.network)
 
     const dispatch = useAppDispatch()
@@ -27,9 +29,11 @@ export const TokensTab = () => {
         if (isKeyless) {
             if (!keylessAccount) return "0x"
             return keylessAccount.accountAddress.toString()
+        } else {
+            if (!account) return "0x"
+            return account.accountAddress.toString()
         }
-        return "0x"
-    }, [isKeyless, keylessAccount])
+    }, [isKeyless, keylessAccount, account])
 
     useEffect(() => {
         const handleEffect = async () => {

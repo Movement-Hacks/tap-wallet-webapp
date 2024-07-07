@@ -1,5 +1,5 @@
 import { EphemeralKeyPair } from "@aptos-labs/ts-sdk"
-import { decode, encode } from "../../encode-decode.aptos"
+import { decode, encode } from "../../utils"
 
 export const EPHEMERAL_KEY_PAIRS_KEY = "ephemeral-key-pairs"
 export type StoredEphemeralKeyPairs = { [nonce: string]: EphemeralKeyPair };

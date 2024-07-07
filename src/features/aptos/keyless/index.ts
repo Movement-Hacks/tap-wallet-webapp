@@ -1,5 +1,5 @@
 import { EphemeralKeyPair, Network } from "@aptos-labs/ts-sdk"
-import { getLocalEphemeralKeyPair, storeEphemeralKeyPair } from "./ephemeral-key-pair.keyless"
+import { getLocalEphemeralKeyPair, storeEphemeralKeyPair } from "./store.keyless"
 import { OpenIdProvider, providerMap } from "./constants.keyless"
 import { getNonceFromJwt, parseJwtFromUrl } from "./jwt.keyless"
 import { getAptos } from "../constants.aptos"
