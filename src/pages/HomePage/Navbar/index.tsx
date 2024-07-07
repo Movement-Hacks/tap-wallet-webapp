@@ -8,12 +8,12 @@ import {
     NavbarMenu,
     NavbarMenuItem,
 } from "@nextui-org/react"
-import { setIsMenuOpen, useAppDispatch, useAppSelector } from "../../../redux"
+import { setAuthenticated, setIsMenuOpen, setLock, useAppDispatch, useAppSelector } from "../../../redux"
 import { ChangeNetworkSelect } from "./ChangeNetworkSelect"
 export const Navbar = () => {
     const isMenuOpen = useAppSelector((state) => state.homeReducer.isMenuOpen)
     const dispatch = useAppDispatch()
-
+    
     const menuItems = [
         "Profile",
         "Dashboard",
@@ -68,6 +68,12 @@ export const Navbar = () => {
                         </Link>
                     </NavbarMenuItem>
                 ))}
+                <Link as={"button"} onPress={() => {dispatch(setLock({
+                    lock: true
+                }))}} color="danger" size="sm">Log</Link>
+                <Link as={"button"} onPress={() => {dispatch(setAuthenticated({
+                    authenticated: false
+                }))}} color="danger" size="sm">Sign Out</Link>
             </NavbarMenu>
         </NextUINavbar>
     )

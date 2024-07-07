@@ -7,7 +7,10 @@ export const parseJwtFromUrl = (url: string): string | null => {
     return params.get("id_token")
 }
 
-export const getNonceFromJwt = (jwt: string) : string => {
-    const { nonce } = jwtDecode<{ nonce: string }>(jwt)
-    return nonce
+export interface DecodedJwtPayload {
+    nonce: string, email: string
+}
+
+export const getDecodedJwtPayload = (jwt: string) : DecodedJwtPayload => {
+    return jwtDecode<DecodedJwtPayload>(jwt)
 }

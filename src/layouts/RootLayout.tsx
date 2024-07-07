@@ -1,19 +1,58 @@
-import React, { useEffect } from "react"
-import { useAppDispatch } from "../redux"
-import { Outlet, useNavigate } from "react-router-dom"
-import { encryptedMnemonicExists } from "../features"
+import React, { useEffect, useRef } from "react"
+import {
+    setAuthenticated,
+    setLock,
+    useAppDispatch,
+    useAppSelector,
+} from "../redux"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { encryptedMnemonicExists, getAuthenticated } from "../features"
 
 export const RootLayout = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    
+
+    const authenticated = useAppSelector(
+        (state) => state.authReducer.authenticated
+    )
+    const lock = useAppSelector((state) => state.authReducer.lock)
+    const location = useLocation()
+
+    const componentDidMount = useRef(false)
+
     useEffect(() => {
-        if (encryptedMnemonicExists()) {
-            navigate("/enter-password")
-        } else {
-            navigate("/auth")
+        try {
+            if (authenticated && location.pathname === "/home") return
+            if (getAuthenticated()) {
+                dispatch(
+                    setAuthenticated({
+                        authenticated: true,
+                    })
+                )
+            }
+            if (encryptedMnemonicExists()) {
+                dispatch(
+                    setLock({
+                        lock: true,
+                    })
+                )
+            }
+        } finally {
+            componentDidMount.current = true
         }
     }, [dispatch])
+
+    useEffect(() => {
+        if (!componentDidMount.current) return
+        if (!authenticated && location.pathname !== "auth") {
+            navigate("/auth")
+            return
+        }
+        if (lock && location.pathname !== "enter-password") {
+            navigate("/enter-password")
+            return
+        }
+    }, [navigate, authenticated, lock])
 
     return <Outlet />
 }

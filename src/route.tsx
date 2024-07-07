@@ -21,10 +21,6 @@ export const router = createBrowserRouter([
                 element: <AuthPage />,
             },
             {
-                path: "/google-oath2-callback",
-                element: <GoogleOAuth2CallbackPage />,
-            },
-            {
                 path: "/home",
                 element: <HomePage />,
             },
@@ -53,6 +49,10 @@ export const router = createBrowserRouter([
                 element: <div>Not found</div>,
             },
         ]
-    }
+    },
+    {
+        path: "/google-oath2-callback",
+        element: <GoogleOAuth2CallbackPage />,
+    },
 ]
 )

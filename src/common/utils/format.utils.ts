@@ -7,6 +7,6 @@ export const truncateString = (
     if (!string) return ""
     if (string.length <= start + end) return string
     const beginning = string.slice(0, start)
-    const ending = string.slice(-end)
+    const ending = end !== 0 ? string.slice(-end) : ""
     return `${beginning}...${ending}`
 }

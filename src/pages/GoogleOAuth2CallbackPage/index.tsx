@@ -26,11 +26,7 @@ export const GoogleOAuth2CallbackPage = () => {
         const handleEffect = async () => {
             try {
                 const keylessAccount = await getKeylessAccount()
-                dispatch(
-                    connectKeyless({
-                        keylessAccount,
-                    })
-                )
+                dispatch(connectKeyless(keylessAccount) )
                 dispatch(
                     setIsValidated({
                         isValidated: true,

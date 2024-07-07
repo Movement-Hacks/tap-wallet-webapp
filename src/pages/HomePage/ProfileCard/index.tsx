@@ -40,7 +40,9 @@ export const ProfileCard = () => {
         <Card shadow="none" className="bg-primary/10">
             <CardBody className="p-4">
                 <div>
-                    <div className="font-bold text-2xl">{name}</div>
+                    <Tooltip content={name}>
+                        <div className="font-bold text-2xl">{truncateString(name, 16, 0)}</div>
+                    </Tooltip> 
                     <Snippet
                         codeString={getAddress()}
                         className="w-fit"
