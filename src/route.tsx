@@ -11,6 +11,7 @@ import {
     CreatePasswordPage,
 } from "./pages"
 import { RootLayout } from "./layouts"
+import { AddAccountPage } from "./pages/AddAccountPage"
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: "/enter-password",
                 element: <EnterPasswordPage />,
+            },
+            {
+                path: "/add-account",
+                element: <AddAccountPage/>,
             },
             {
                 path: "*",

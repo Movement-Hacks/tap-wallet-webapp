@@ -6,7 +6,7 @@ import {
     retrieveAccountFromMnemonic,
     toastWrongPassword,
 } from "../../features"
-import { connect, useAppDispatch } from "../../redux"
+import { connect, setMnemonic, useAppDispatch } from "../../redux"
 import { useNavigate } from "react-router-dom"
 
 export interface FormikValue {
@@ -66,6 +66,9 @@ export const EnterPasswordPageProvider = ({
                 try {
                     const mnemonic = loadMnemonic(password)
                     const account = retrieveAccountFromMnemonic(mnemonic)
+                    dispatch(setMnemonic({
+                        mnemonic
+                    }))
                     dispatch(connect(account))
                     navigate("/home")
                 } catch (ex) {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 export const PostCreateAccountPage = () => {
     const mnemonic = useAppSelector(
-        (state) => state.postCreateAccountReducer.mnemonic
+        (state) => state.authReducer.mnemonic
     )
     const navigate = useNavigate()
 

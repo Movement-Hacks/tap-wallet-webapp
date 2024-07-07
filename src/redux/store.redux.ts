@@ -4,7 +4,6 @@ import {
     configReducer,
     googleOAuth2CallbackReducer,
     homeReducer,
-    postCreateAccountReducer,
     modalsReducer,
 } from "./slices"
 
@@ -12,11 +11,14 @@ export const store = configureStore({
     reducer: {
         authReducer,
         googleOAuth2CallbackReducer,
-        postCreateAccountReducer,
         homeReducer,
         configReducer,
         modalsReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
 })
 
 export type RootState = ReturnType<typeof store.getState>;

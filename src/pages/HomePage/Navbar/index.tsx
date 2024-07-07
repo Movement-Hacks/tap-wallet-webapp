@@ -6,26 +6,18 @@ import {
     NavbarMenuToggle,
     NavbarItem,
     NavbarMenu,
-    NavbarMenuItem,
+    Spacer,
 } from "@nextui-org/react"
 import { setAuthenticated, setIsMenuOpen, setLock, useAppDispatch, useAppSelector } from "../../../redux"
 import { ChangeNetworkSelect } from "./ChangeNetworkSelect"
+import { SwitchAccountSelect } from "./SwitchAccountSelect"
+import { PlusIcon } from "@heroicons/react/24/outline"
+import { useNavigate } from "react-router-dom"
 export const Navbar = () => {
     const isMenuOpen = useAppSelector((state) => state.homeReducer.isMenuOpen)
+    const isKeyless = useAppSelector((state) => state.authReducer.isKeyless)
     const dispatch = useAppDispatch()
-    
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
-    ]
+    const navigate = useNavigate()
 
     return (
         <NextUINavbar
@@ -50,24 +42,18 @@ export const Navbar = () => {
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            color={
-                                index === 2
-                                    ? "primary"
-                                    : index === menuItems.length - 1
-                                        ? "danger"
-                                        : "foreground"
-                            }
-                            className="w-full"
-                            href="#"
-                            size="lg"
-                        >
-                            {item}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
+                <div>
+                    {
+                        !isKeyless ? <SwitchAccountSelect/> : null
+                    }
+                    <Spacer y={4}/>
+                    <Link as="button" onPress={() => navigate("/add-account")}>
+                        <div className="flex items-center gap-2">
+                            <PlusIcon className="w-5 h-5"/>
+                            <div className="text-sm">Add Account</div>
+                        </div>
+                    </Link>
+                </div> 
                 <Link as={"button"} onPress={() => {dispatch(setLock({
                     lock: true
                 }))}} color="danger" size="sm">Log</Link>

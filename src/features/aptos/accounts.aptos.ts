@@ -13,33 +13,35 @@ export type Accounts = Record<number, Account>;
 
 export const createAccountFromMnemonic = (
     mnemonic: string,
-    accountIndex: number
+    accountIndex: number,
+    name?: string
 ) => {
     const account = AptosAccount.fromDerivationPath({
         path: `m/44'/637'/0'/0'/${accountIndex}'`,
         mnemonic,
     })
-    const name = `Account ${accountIndex}`
+    const _name = name ?? `Account ${accountIndex}`
     storeAccount(accountIndex, {
         accountAddress: account.accountAddress.toString(),
-        name,
+        name: _name,
     })
     return {
         account,
-        name
+        name: _name
     }
 }
 
 export const retrieveAccountFromMnemonic = (
-    mnemonic: string
+    mnemonic: string,
+    accountIndex?: number
 ) => {
     const accounts = getAccounts()
-    const activeAccountIndex = getActiveAccountIndex()
-    if (activeAccountIndex === undefined) throw new Error("Active account index not found.")
-    const { name } = accounts[activeAccountIndex]
+    const _accountIndex = accountIndex ?? getActiveAccountIndex()
+    if (_accountIndex === undefined) throw new Error("Active account index not found.")
+    const { name } = accounts[_accountIndex]
 
     const account = AptosAccount.fromDerivationPath({
-        path: `m/44'/637'/0'/0'/${activeAccountIndex}'`,
+        path: `m/44'/637'/0'/0'/${_accountIndex}'`,
         mnemonic,
     })
 

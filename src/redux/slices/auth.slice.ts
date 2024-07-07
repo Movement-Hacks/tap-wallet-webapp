@@ -17,6 +17,7 @@ interface AuthState {
   name: string;
   accounts: Accounts;
   activeAccountIndex?: number;
+  mnemonic?: string;
   lock: boolean;
 }
 
@@ -61,7 +62,10 @@ export const authSlice = createSlice({
         setPassword: (state, action: PayloadAction<{ password: string }>) => {
             state.password = action.payload.password
         },
-        setAuthenticated: (state, action: PayloadAction<{ authenticated: boolean }>) => {
+        setAuthenticated: (
+            state,
+            action: PayloadAction<{ authenticated: boolean }>
+        ) => {
             state.authenticated = action.payload.authenticated
         },
         load: (state) => {
@@ -70,6 +74,27 @@ export const authSlice = createSlice({
         },
         setLock: (state, action: PayloadAction<{ lock: boolean }>) => {
             state.lock = action.payload.lock
+        },
+        setActiveAccountIndex: (
+            state,
+            action: PayloadAction<{ activeAccountIndex: number }>
+        ) => {
+            state.activeAccountIndex = action.payload.activeAccountIndex
+        },
+        updateAccount: (
+            state,
+            action: PayloadAction<{
+        account: Ed25519Account;
+        accountIndex: number;
+        name: string;
+      }>
+        ) => {
+            state.account = action.payload.account
+            state.name = action.payload.name
+            state.activeAccountIndex = action.payload.accountIndex
+        },
+        setMnemonic: (state, action: PayloadAction<{ mnemonic: string }>) => {
+            state.mnemonic = action.payload.mnemonic
         },
     },
 })
@@ -81,6 +106,9 @@ export const {
     load,
     setPassword,
     setLock,
-    setAuthenticated
+    setAuthenticated,
+    setActiveAccountIndex,
+    setMnemonic,
+    updateAccount,
 } = authSlice.actions
 export const authReducer = authSlice.reducer

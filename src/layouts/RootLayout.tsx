@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react"
 import {
+    load,
     setAuthenticated,
     setLock,
     useAppDispatch,
@@ -22,7 +23,8 @@ export const RootLayout = () => {
 
     useEffect(() => {
         try {
-            if (authenticated && location.pathname === "/home") return
+            if (authenticated) return
+
             if (getAuthenticated()) {
                 dispatch(
                     setAuthenticated({
@@ -40,6 +42,10 @@ export const RootLayout = () => {
         } finally {
             componentDidMount.current = true
         }
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(load())
     }, [dispatch])
 
     useEffect(() => {

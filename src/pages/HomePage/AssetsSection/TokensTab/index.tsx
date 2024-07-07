@@ -36,6 +36,7 @@ export const TokensTab = () => {
     }, [isKeyless, keylessAccount, account])
 
     useEffect(() => {
+        if (getAddress() === "0x") return
         const handleEffect = async () => {
             dispatch(
                 setIsFetchingBalance({

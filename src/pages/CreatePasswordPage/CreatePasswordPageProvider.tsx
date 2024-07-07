@@ -2,7 +2,7 @@ import React, { ReactNode, createContext, useMemo } from "react"
 import { Form, Formik, FormikProps } from "formik"
 import { useNavigate } from "react-router-dom"
 import * as Yup from "yup"
-import { connect, useAppDispatch, useAppSelector } from "../../redux"
+import { connect, load, useAppDispatch, useAppSelector } from "../../redux"
 import {
     getNextAccountIndex,
     storeMnemonic,
@@ -59,7 +59,7 @@ export const CreatePasswordPageProvider = ({
     const dispatch = useAppDispatch()
 
     const mnemonic = useAppSelector(
-        (state) => state.postCreateAccountReducer.mnemonic
+        (state) => state.authReducer.mnemonic
     )
 
     return (
@@ -69,6 +69,7 @@ export const CreatePasswordPageProvider = ({
                 password: Yup.string().required("Password is required"),
             })}
             onSubmit={async ({ password }) => {
+                if (!mnemonic) return
                 storeMnemonic({
                     mnemonic,
                     password,
@@ -76,6 +77,7 @@ export const CreatePasswordPageProvider = ({
                 const accountIndex = getNextAccountIndex()
                 const account = createAccountFromMnemonic(mnemonic, accountIndex)
                 dispatch(connect(account))
+                dispatch(load())
                 navigate("/home")
             }}
         >
