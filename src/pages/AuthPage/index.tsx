@@ -1,5 +1,5 @@
 import React from "react"
-import { Divider } from "@nextui-org/react"
+import { Divider, Image } from "@nextui-org/react"
 import { ContinueWithGoogleButton } from "./ContinueWithGoogleButton"
 import { CreateWalletButton } from "./CreateWalletButton"
 import { ImportWalletButton } from "./ImportWalletButton"
@@ -8,7 +8,7 @@ export const AuthPage = () => {
     return (
         <div className="fit-container grid place-items-center p-6">
             <div className="grid gap-12 w-full">
-                <div className="text-6xl font-bold text-center">CI WALLET</div>
+                <Image src="/icons/logo.svg" alt="logo"/>
                 <div className="grid gap-4">
                     <div className="grid gap-4">
                         <CreateWalletButton/>
