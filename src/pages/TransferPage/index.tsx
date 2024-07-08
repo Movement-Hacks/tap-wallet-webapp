@@ -7,12 +7,14 @@ import {
     Image,
     Button,
     Spacer,
+    Link
 } from "@nextui-org/react"
 import {
     TransferModalContext,
     TransferModalProvider,
 } from "./TransferModalProvider"
-import { useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
+import { XMarkIcon } from "@heroicons/react/24/outline"
 
 const WrappedTransferPage = () => {
     const tokens = useAppSelector((state) => state.homeReducer.tokens)
@@ -23,7 +25,18 @@ const WrappedTransferPage = () => {
     return (
         <div className="p-6 justify-between flex flex-col h-screen">
             <div>
-                <div className="text-2xl font-bold">Transfer</div>
+                <div className="flex items-center justify-between">
+                    <div className="text-2xl font-bold">Transfer</div>
+                    <Link
+                        color="foreground"
+                        as="button"
+                        onPress={() => {
+                            navigate("/home")
+                        }}
+                    >
+                        <XMarkIcon className="w-8 h-8" />
+                    </Link>
+                </div>
                 <Spacer y={6} />
                 <div className="gap-4 grid">
                     <Input
@@ -104,19 +117,9 @@ const WrappedTransferPage = () => {
                     </Select>
                 </div>
             </div>
-            <div className="grid gap-2">
-                <Button color="primary" onPress={() => formik.submitForm()} fullWidth>
+            <Button color="primary" onPress={() => formik.submitForm()} fullWidth>
           Transfer
-                </Button>
-                <Button
-                    color="primary"
-                    variant="bordered"
-                    onPress={() => navigate("/home")}
-                    fullWidth
-                >
-          Cancel
-                </Button>
-            </div>
+            </Button>
         </div>
     )
 }

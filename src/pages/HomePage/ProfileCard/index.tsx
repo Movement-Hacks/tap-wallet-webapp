@@ -78,7 +78,7 @@ export const ProfileCard = () => {
                     </Tooltip>
                     <Tooltip content="Play">
                         <Button isIconOnly color="primary" variant="flat">
-                            <Gamepad2Icon strokeWidth={1.5} className="w-5 h-5" />
+                            <Gamepad2Icon strokeWidth={3/2} className="w-5 h-5" />
                         </Button>
                     </Tooltip>
                 </div>

@@ -9,6 +9,7 @@ import {
     TransferPage,
     EnterPasswordPage,
     CreatePasswordPage,
+    SettingsPage,
 } from "./pages"
 import { RootLayout } from "./layouts"
 import { AddAccountPage } from "./pages/AddAccountPage"
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
             {
                 path: "/add-account",
                 element: <AddAccountPage/>,
+            },
+            {
+                path: "/settings",
+                element: <SettingsPage/>,
             },
             {
                 path: "*",

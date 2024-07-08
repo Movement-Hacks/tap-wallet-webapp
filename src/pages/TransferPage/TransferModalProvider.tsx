@@ -2,7 +2,7 @@ import { Form, Formik, FormikProps } from "formik"
 import React, { ReactNode, createContext, useCallback, useMemo } from "react"
 import * as Yup from "yup"
 import {
-    openConfirmTransactionModal,
+    onConfirmTransactionModalOpen,
     useAppDispatch,
     useAppSelector,
 } from "../../redux"
@@ -63,6 +63,9 @@ export const TransferModalProvider = ({
     const keylessAccount = useAppSelector(
         (state) => state.authReducer.keylessAccount
     )
+    const account = useAppSelector(
+        (state) => state.authReducer.account
+    )
     const tokens = useAppSelector((state) => state.homeReducer.tokens)
     const dispatch = useAppDispatch()
 
@@ -70,8 +73,10 @@ export const TransferModalProvider = ({
         if (isKeyless) {
             if (!keylessAccount) return "0x"
             return keylessAccount.accountAddress.toString()
+        } else {
+            if (!account) return "0x"
+            return account.accountAddress.toString()
         }
-        return "0x"
     }, [isKeyless, keylessAccount])
 
     return (
@@ -91,7 +96,7 @@ export const TransferModalProvider = ({
                     amount: computeRaw(transferAmount),
                     coinType: tokens.find(({ key }) => key === tokenKey)?.coinType,
                 })
-                const signer = isKeyless ? keylessAccount : keylessAccount
+                const signer = isKeyless ? keylessAccount : account
                 if (!signer) return
 
                 const functionName = "aptos_account::transfer_coins"
@@ -106,7 +111,7 @@ export const TransferModalProvider = ({
                     )
                 )
                 dispatch(
-                    openConfirmTransactionModal({
+                    onConfirmTransactionModalOpen({
                         signedTransaction: {
                             functionName,
                             payload,

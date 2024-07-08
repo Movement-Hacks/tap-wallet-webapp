@@ -15,7 +15,7 @@ export const toastTransaction = ({
     network,
 }: ToastTransactionParams) => {
     toastSuccess(
-        <div className="flex gap-2">
+        <div className="flex gap-2 text-primary">
             <div className="text-sm">Txn:</div>
             <Link
                 size="sm"

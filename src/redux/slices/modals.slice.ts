@@ -16,6 +16,12 @@ interface ModalState {
     signedTransaction?: SignedTransaction;
     isSubmitting: boolean;
   };
+  privateKeyModal: {
+    isOpen: boolean;
+  },
+  mnemonicModal: {
+    isOpen: boolean
+  }
 }
 
 const initialState: ModalState = {
@@ -23,6 +29,12 @@ const initialState: ModalState = {
         isOpen: false,
         isSubmitting: false
     },
+    mnemonicModal: {
+        isOpen: false
+    },
+    privateKeyModal: {
+        isOpen: false
+    }
 }
 
 export const modalsSlice = createSlice({
@@ -36,7 +48,7 @@ export const modalsSlice = createSlice({
         onConfirmTransactionModalClose: (state) => {
             state.confirmTransactionModal.isOpen = false
         },
-        openConfirmTransactionModal: (
+        onConfirmTransactionModalOpen: (
             state,
             action: PayloadAction<{ signedTransaction: SignedTransaction }>
         ) => {
@@ -50,13 +62,43 @@ export const modalsSlice = createSlice({
         ) => {
             state.confirmTransactionModal.isSubmitting = action.payload.isSubmitting
         },
+        onPrivateKeyModalOpenChange: (state) => {
+            state.privateKeyModal.isOpen =
+        !state.privateKeyModal.isOpen
+        },
+        onPrivateKeyModalClose: (state) => {
+            state.privateKeyModal.isOpen = false
+        },
+        onPrivateKeyModalOpen: (
+            state
+        ) => {
+            state.privateKeyModal.isOpen = true
+        },
+        onMnemonicModalOpenChange: (state) => {
+            state.mnemonicModal.isOpen =
+        !state.mnemonicModal.isOpen
+        },
+        onMnemonicModalClose: (state) => {
+            state.mnemonicModal.isOpen = false
+        },
+        onMnemonicModalOpen: (
+            state
+        ) => {
+            state.mnemonicModal.isOpen = true
+        },
     },
 })
 
 export const {
     onConfirmTransactionModalOpenChange,
     onConfirmTransactionModalClose,
-    openConfirmTransactionModal,
-    setIsConfirmTransactionModalSubmitting
+    onConfirmTransactionModalOpen,
+    setIsConfirmTransactionModalSubmitting,
+    onPrivateKeyModalOpenChange,
+    onPrivateKeyModalClose,
+    onPrivateKeyModalOpen,
+    onMnemonicModalOpenChange,
+    onMnemonicModalClose,
+    onMnemonicModalOpen
 } = modalsSlice.actions
 export const modalsReducer = modalsSlice.reducer

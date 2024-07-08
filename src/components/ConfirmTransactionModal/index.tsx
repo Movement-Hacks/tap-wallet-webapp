@@ -30,6 +30,9 @@ export const ConfirmTransactionModal = () => {
     const keylessAccount = useAppSelector(
         (state) => state.authReducer.keylessAccount
     )
+    const account = useAppSelector(
+        (state) => state.authReducer.account
+    )
     const signedTransaction = useAppSelector(
         (state) => state.modalsReducer.confirmTransactionModal.signedTransaction
     )
@@ -100,7 +103,7 @@ export const ConfirmTransactionModal = () => {
                             </Button>
                             <Button
                                 onPress={async () => {
-                                    const signer = isKeyless ? keylessAccount : keylessAccount
+                                    const signer = isKeyless ? keylessAccount : account
                                     if (!signer) return
                                     if (!transaction) return
 

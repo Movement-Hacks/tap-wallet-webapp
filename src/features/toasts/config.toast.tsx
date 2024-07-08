@@ -5,7 +5,7 @@ import toast from "react-hot-toast"
 import { v4 as uuidv4 } from "uuid"
 export const TOAST_DURATION = 10000
 export const TOAST_ERROR_COLOR = "#F31260" //red
-export const TOAST_SUCCESS_COLOR = "FBBF24" //amber
+export const TOAST_SUCCESS_COLOR = "#FBBF24" //amber
 
 export const toastSuccess = (message: string | JSX.Element) => {
     const id = uuidv4()
@@ -23,8 +23,9 @@ export const toastSuccess = (message: string | JSX.Element) => {
         {
             id,
             duration: TOAST_DURATION,
-            style: {
-                color: TOAST_SUCCESS_COLOR,
+            iconTheme: {
+                primary: TOAST_SUCCESS_COLOR,
+                secondary: "#fff",
             },
         }
     )
@@ -36,6 +37,7 @@ export const toastError = (message: string | JSX.Element) => {
         <div className="flex gap-2 items-center">
             {message}
             <Link
+                color="danger"
                 onPress={() => {
                     toast.dismiss(id)
                 }}
@@ -46,8 +48,9 @@ export const toastError = (message: string | JSX.Element) => {
         {
             id,
             duration: TOAST_DURATION,
-            style: {
-                color: TOAST_ERROR_COLOR,
+            iconTheme: {
+                primary: TOAST_ERROR_COLOR,
+                secondary: "#fff",
             },
         }
     )

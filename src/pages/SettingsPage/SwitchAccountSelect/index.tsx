@@ -4,9 +4,9 @@ import {
     updateAccount,
     useAppDispatch,
     useAppSelector,
-} from "../../../../redux"
-import { truncateString } from "../../../../common"
-import { retrieveAccountFromMnemonic } from "../../../../features"
+} from "../../../redux"
+import { truncateString } from "../../../common"
+import { retrieveAccountFromMnemonic } from "../../../features"
 import { ChevronRightIcon } from "@heroicons/react/24/outline"
 
 export const SwitchAccountSelect = () => {
