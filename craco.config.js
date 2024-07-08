@@ -6,7 +6,7 @@ module.exports = {
     // ...
     devServer: {
         port: 7755
-    },
+    }, 
     webpack: {
         alias: {
             crypto: require.resolve("crypto-browserify"),
