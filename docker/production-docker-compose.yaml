@@ -7,14 +7,20 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+
 services:
   server:
+    container_name: ci-wallet-webapp
     build:
-      context: .
-    env_file:
-      .env.docker
+      context: ..
+      args:
+        - REACT_APP_GOOGLE_REDIRECT_URI= ${REACT_APP_GOOGLE_REDIRECT_URI}
+        - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
+        - NODE_ENV=${NODE_ENV}
     ports:
-      - 7755:7755
+        - 7755:7755
+
+# docker compose -f docker/local-docker-compose.yaml --env-file .env.docker up --build -d
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

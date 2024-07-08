@@ -11,7 +11,7 @@ ARG NODE_VERSION=22.3.0
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as base
-
+RUN echo ${REACT_APP_GOOGLE_CLIENT_ID}
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
@@ -41,6 +41,15 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
     npm ci
+
+
+ARG REACT_APP_GOOGLE_REDIRECT_URI
+ARG REACT_APP_GOOGLE_CLIENT_ID
+ARG NODE_ENV
+
+ENV REACT_APP_GOOGLE_REDIRECT_URI $REACT_APP_GOOGLE_REDIRECT_URI
+ENV REACT_APP_GOOGLE_CLIENT_ID $REACT_APP_GOOGLE_CLIENT_ID
+ENV NODE_ENV $NODE_ENV
 
 # Copy the rest of the source files into the image.
 COPY . .
