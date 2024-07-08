@@ -42,14 +42,13 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci
 
+ENV NODE_ENV production
 
 ARG REACT_APP_GOOGLE_REDIRECT_URI
-ARG REACT_APP_GOOGLE_CLIENT_ID
-ARG NODE_ENV
-
 ENV REACT_APP_GOOGLE_REDIRECT_URI $REACT_APP_GOOGLE_REDIRECT_URI
+
+ARG REACT_APP_GOOGLE_CLIENT_ID
 ENV REACT_APP_GOOGLE_CLIENT_ID $REACT_APP_GOOGLE_CLIENT_ID
-ENV NODE_ENV $NODE_ENV
 
 # Copy the rest of the source files into the image.
 COPY . .

@@ -16,7 +16,6 @@ services:
       args:
         - REACT_APP_GOOGLE_REDIRECT_URI= ${REACT_APP_GOOGLE_REDIRECT_URI}
         - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
-        - NODE_ENV=${NODE_ENV}
     ports:
         - 7755:7755
 
