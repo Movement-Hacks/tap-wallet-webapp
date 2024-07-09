@@ -5,7 +5,7 @@ import toast from "react-hot-toast"
 import { v4 as uuidv4 } from "uuid"
 export const TOAST_DURATION = 10000
 export const TOAST_ERROR_COLOR = "#F31260" //red
-export const TOAST_SUCCESS_COLOR = "#FBBF24" //amber
+export const TOAST_SUCCESS_COLOR = "#34d399" //teal
 
 export const toastSuccess = (message: string | JSX.Element) => {
     const id = uuidv4()
