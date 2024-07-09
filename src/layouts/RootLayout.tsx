@@ -49,15 +49,15 @@ export const RootLayout = () => {
     }, [dispatch])
 
     useEffect(() => {
-        // if (!componentDidMount.current) return
-        // if (!authenticated && location.pathname !== "auth") {
-        //     navigate("/auth")
-        //     return
-        // }
-        // if (lock && location.pathname !== "enter-password") {
-        //     navigate("/enter-password")
-        //     return
-        // }
+        if (!componentDidMount.current) return
+        if (!authenticated && location.pathname !== "auth") {
+            navigate("/auth")
+            return
+        }
+        if (lock && location.pathname !== "enter-password") {
+            navigate("/enter-password")
+            return
+        }
     }, [navigate, authenticated, lock])
 
     return <Outlet />
