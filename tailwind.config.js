@@ -20,13 +20,12 @@ module.exports = {
         themes: {
             light: {
                 colors: {
-                    primary: "#FBBF24"
+                    primary: "#34d399"
                 }
             },
             dark: {
                 colors: {
                     primary: "#34d399"
-"
                 }
             },
         }
