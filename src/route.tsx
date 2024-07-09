@@ -15,7 +15,8 @@ import { RootLayout } from "./layouts"
 import { AddAccountPage } from "./pages/AddAccountPage"
 
 export const router = createBrowserRouter([
-    {
+    {   
+        path: "/",
         element: <RootLayout/>,
         children: [
             {
@@ -53,16 +54,12 @@ export const router = createBrowserRouter([
             {
                 path: "/settings",
                 element: <SettingsPage/>,
-            },
-            {
-                path: "*",
-                element: <div>Not found</div>,
-            },
+            }
         ]
     },
     {
         path: "/google-oath2-callback",
         element: <GoogleOAuth2CallbackPage />,
-    },
+    }
 ]
 )
