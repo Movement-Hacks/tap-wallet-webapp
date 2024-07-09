@@ -1,6 +1,6 @@
 export * from "./AuthPage"
 export * from "./PostCreateAccountPage"
-export * from "./GoogleOAuth2CallbackPage"
+export * from "./GoogleCallbackPage"
 export * from "./HomePage"
 export * from "./ImportWalletPage" 
 export * from "./TransferPage"

@@ -11,7 +11,7 @@ import { getKeylessAccount } from "../../features"
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 import { useNavigate } from "react-router-dom"
 
-export const GoogleOAuth2CallbackPage = () => {
+export const GoogleCallbackPage = () => {
     const isValidating = useAppSelector(
         (state) => state.googleOAuth2CallbackReducer.isValidating
     )
