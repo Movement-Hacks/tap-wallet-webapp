@@ -16,7 +16,6 @@ import { AddAccountPage } from "./pages/AddAccountPage"
 
 export const router = createBrowserRouter([
     {   
-        path: "/",
         element: <RootLayout/>,
         children: [
             {
