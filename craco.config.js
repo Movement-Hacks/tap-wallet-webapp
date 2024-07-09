@@ -5,7 +5,7 @@ const { ProvidePlugin } = require("webpack")
 module.exports = {
     // ...
     devServer: {
-        port: 7755
+        port: 3000
     }, 
     webpack: {
         alias: {

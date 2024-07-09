@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import {
     connectKeyless,
     setIsValidated,
-    setIsValidating,
     useAppDispatch,
     useAppSelector,
 } from "../../redux"
@@ -36,12 +35,6 @@ export const GoogleOAuth2CallbackPage = () => {
                 dispatch(
                     setIsValidated({
                         isValidated: false,
-                    })
-                )
-            } finally {
-                dispatch(
-                    setIsValidating({
-                        isValidating: false,
                     })
                 )
             }
