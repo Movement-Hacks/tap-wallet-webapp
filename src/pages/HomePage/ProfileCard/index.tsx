@@ -77,7 +77,7 @@ export const ProfileCard = () => {
                         </Button>
                     </Tooltip>
                     <Tooltip content="Play">
-                        <Button isIconOnly color="primary" variant="flat">
+                        <Button isIconOnly onPress={() => navigate("/play")} color="primary" variant="flat">
                             <Gamepad2Icon strokeWidth={3/2} className="w-5 h-5" />
                         </Button>
                     </Tooltip>

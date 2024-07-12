@@ -13,6 +13,7 @@ import {
 } from "./pages"
 import { RootLayout } from "./layouts"
 import { AddAccountPage } from "./pages/AddAccountPage"
+import { PlayPage } from "./pages/PlayPage"
 
 export const router = createBrowserRouter([
     {   
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
     {
         path: "/google-callback",
         element: <GoogleCallbackPage />,
+    },
+    {
+        path: "/play",
+        element: <PlayPage />,
     }
 ]
 )
