@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react"
 import { Unity } from "react-unity-webgl"
 import { PlayPageContext, PlayPageProvider } from "../PlayPageProvider"
 import { useListeners } from "./useListeners"
+import { useLoad } from "./useLoad"
+import { SWRConfig } from "swr"
 
 const WrappedGameCanvas = () => {
     const { unityContext } = useContext(PlayPageContext)!
@@ -11,6 +13,7 @@ const WrappedGameCanvas = () => {
         window.devicePixelRatio
     )
 
+    useLoad()
     useListeners()
 
     useEffect(() => {
@@ -29,13 +32,19 @@ const WrappedGameCanvas = () => {
     [devicePixelRatio]
     )
 
-    return <Unity className="w-full h-full" unityProvider={unityProvider} />
+    return <Unity style={{
+        width: "100%",
+        height: "100%"
+    }} unityProvider={unityProvider} />
 }
 
 export const GameCanvas = () => {
     return (
-        <PlayPageProvider>
-            <WrappedGameCanvas />
-        </PlayPageProvider>
+        <SWRConfig value={{ provider: () => new Map() }}>
+            <PlayPageProvider>
+                <WrappedGameCanvas />
+            </PlayPageProvider>
+        </SWRConfig>
+      
     )
 }
