@@ -30,7 +30,6 @@ export const useListeners = () => {
             switch (_action) {
             case GameAction.Save: {
                 const publicKey = _account.publicKey.toString() ?? ""
-                console.log(publicKey)
                 const signature = _account.sign(_payloadMessge).toString() ?? ""
                 await save({
                     payloadMessage: _payloadMessge,
