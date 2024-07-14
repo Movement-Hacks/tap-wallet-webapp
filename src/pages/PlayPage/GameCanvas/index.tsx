@@ -35,7 +35,7 @@ const WrappedGameCanvas = () => {
     return <Unity style={{
         width: "100%",
         height: "100%"
-    }} unityProvider={unityProvider} />
+    }} unityProvider={unityProvider} devicePixelRatio={devicePixelRatio} />
 }
 
 export const GameCanvas = () => {
