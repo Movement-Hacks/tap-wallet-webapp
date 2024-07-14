@@ -18,5 +18,8 @@ jobs:
       env:
         REACT_APP_GOOGLE_REDIRECT_URI: ${{ vars.REACT_APP_GOOGLE_REDIRECT_URI }}
         REACT_APP_GOOGLE_CLIENT_ID: ${{ vars.REACT_APP_GOOGLE_CLIENT_ID }}
+        REACT_APP_BACKEND_API_URL: ${{ vars.REACT_APP_BACKEND_API_URL }}
+        REACT_APP_BACKEND_GRAPHQL_URL: ${{ vars.REACT_APP_BACKEND_GRAPHQL_URL }}
+      
       run: docker compose -f docker/production-docker-compose.yaml -p ci-wallet-webapp up --build -d --force-recreate
  
