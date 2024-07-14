@@ -4,10 +4,11 @@ import { PlayPageContext, PlayPageProvider } from "../PlayPageProvider"
 import { useListeners } from "./useListeners"
 import { useLoad } from "./useLoad"
 import { SWRConfig } from "swr"
+import { Spinner } from "@nextui-org/react"
 
 const WrappedGameCanvas = () => {
     const { unityContext } = useContext(PlayPageContext)!
-    const { unityProvider } = unityContext
+    const { unityProvider, isLoaded } = unityContext
 
     const [devicePixelRatio, setDevicePixelRatio] = useState(
         window.devicePixelRatio
@@ -28,14 +29,28 @@ const WrappedGameCanvas = () => {
         return () => {
             mediaMatcher.removeEventListener("change", updateDevicePixelRatio)
         }
-    },
-    [devicePixelRatio]
-    )
+    }, [devicePixelRatio])
 
-    return <Unity style={{
-        width: "100%",
-        height: "100%"
-    }} unityProvider={unityProvider} devicePixelRatio={devicePixelRatio} />
+    return (
+        <>  
+            {!isLoaded ? 
+                <div className="w-full h-full relative">
+                    <div className="w-full h-full absolute grid place-items-center">
+                        <Spinner size="lg" label="Game loading..." />
+                    </div>
+                </div>
+                : null }
+            <Unity
+                style={{
+                    width: "100%",
+                    height: "100%",
+                }}
+                unityProvider={unityProvider}
+                devicePixelRatio={devicePixelRatio}
+            />
+            
+        </>
+    )
 }
 
 export const GameCanvas = () => {
@@ -45,6 +60,5 @@ export const GameCanvas = () => {
                 <WrappedGameCanvas />
             </PlayPageProvider>
         </SWRConfig>
-      
     )
 }
