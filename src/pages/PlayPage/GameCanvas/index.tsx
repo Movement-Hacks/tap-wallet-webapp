@@ -30,7 +30,7 @@ const WrappedGameCanvas = () => {
             mediaMatcher.removeEventListener("change", updateDevicePixelRatio)
         }
     }, [devicePixelRatio])
-
+   
     return (
         <>  
             {!isLoaded ? 
