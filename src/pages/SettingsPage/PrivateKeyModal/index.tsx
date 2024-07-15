@@ -50,7 +50,7 @@ export const PrivateKeyModal = () => {
                             onPress={() =>
                                 downloadJson({
                                     privateKey,
-                                })
+                                }, "private-key")
                             }
                             startContent={
                                 <DownloadIcon strokeWidth={3 / 2} className="w-5 h-5" />

@@ -30,16 +30,15 @@ const WrappedGameCanvas = () => {
             mediaMatcher.removeEventListener("change", updateDevicePixelRatio)
         }
     }, [devicePixelRatio])
-   
+
     return (
-        <>  
-            {!isLoaded ? 
-                <div className="w-full h-full relative">
-                    <div className="w-full h-full absolute grid place-items-center">
-                        <Spinner size="lg" label="Game loading..." />
-                    </div>
+        <div className="w-full h-full relative">
+            {!isLoaded ? (
+                <div className="w-full h-full absolute grid place-items-center">
+                    <Spinner size="lg" label="Game loading..." />
                 </div>
-                : null }
+            ) : null}
+
             <Unity
                 style={{
                     width: "100%",
@@ -48,8 +47,7 @@ const WrappedGameCanvas = () => {
                 unityProvider={unityProvider}
                 devicePixelRatio={devicePixelRatio}
             />
-            
-        </>
+        </div>
     )
 }
 

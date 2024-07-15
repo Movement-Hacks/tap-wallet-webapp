@@ -8,7 +8,7 @@ export const AuthPage = () => {
     return (
         <div className="fit-container grid place-items-center p-6">
             <div className="grid gap-12 w-full">
-                <Image src="/icons/logo.svg" alt="logo"/>
+                <Image removeWrapper src="/images/logo.svg" className="w-full" alt="logo"/>
                 <div className="grid gap-4">
                     <div className="grid gap-4">
                         <CreateWalletButton/>

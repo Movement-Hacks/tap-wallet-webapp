@@ -19,13 +19,13 @@ export const downloadSVGAsPNG = async (id: string) => {
     downloadFromUrl(pngUrl)
 }
 
-export const downloadJson = async (json: Record<string, unknown>) => {
+export const downloadJson = async (json: Record<string, unknown>, fileName: string) => {
     const jsonData = JSON.stringify(json)
     const blob = new Blob([jsonData], { type: "application/json" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = "mnemonic.json"
+    a.download = `${fileName}.json`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)

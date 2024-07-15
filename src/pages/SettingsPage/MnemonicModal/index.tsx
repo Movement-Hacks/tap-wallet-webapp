@@ -45,9 +45,12 @@ export const MnemonicModal = () => {
                     <ModalFooter className="p-6 pt-0">
                         <Button
                             onPress={() =>
-                                downloadJson({
-                                    mnemonic,
-                                })
+                                downloadJson(
+                                    {
+                                        mnemonic,
+                                    },
+                                    "mnemonic"
+                                )
                             }
                             startContent={
                                 <DownloadIcon strokeWidth={3 / 2} className="w-5 h-5" />

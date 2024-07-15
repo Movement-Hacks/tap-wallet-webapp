@@ -5,11 +5,13 @@ import {
     EnterPasswordPageProvider,
 } from "./EnterPasswordPageProvider"
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline"
+import { setAuthenticated, useAppDispatch } from "../../redux"
 
 const WrappedEnterPasswordPage = () => {
     const { formik } = useContext(EnterPasswordPageContext)!
-
     const [isVisible, setIsVisible] = useState(false)
+
+    const dispatch = useAppDispatch()
 
     return (
         <>
@@ -38,6 +40,14 @@ const WrappedEnterPasswordPage = () => {
             <Spacer y={12} />
             <Button color="primary" fullWidth type="submit">
         Continue
+            </Button>
+            <Spacer y={2}/>
+            <Button color="primary" variant="bordered" onPress={() => {
+                dispatch(setAuthenticated({
+                    authenticated: false
+                }))
+            }} fullWidth>
+        Sign Out
             </Button>
         </>
     )

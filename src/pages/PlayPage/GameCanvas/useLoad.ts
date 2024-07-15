@@ -22,20 +22,22 @@ export const useLoad = () => {
                 address
             },
             schema: {
-                totalBonus: true,
                 balance: true,
+                autoTapperLevel: true,
+                level: true,
+                progress: true
             }
         })
     })
-
-    console.log(data)
 
     useEffect(() => {
         if (!data) return
         sendMessage("Session", "Load", JSON.stringify({
             address,
             balance: data.balance,
-            totalBonus: data.totalBonus
+            autoTapperLevel: data.autoTapperLevel,
+            level: data.level,
+            progress: data.progress,
         }))
     }, [data, sendMessage])
 }
