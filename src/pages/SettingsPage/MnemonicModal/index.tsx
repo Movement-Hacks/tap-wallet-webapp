@@ -22,7 +22,7 @@ export const MnemonicModal = () => {
     )
     const mnemonic = useAppSelector((state) => state.authReducer.mnemonic)
     const dispatch = useAppDispatch()
-
+ 
     return (
         <>
             <Modal
