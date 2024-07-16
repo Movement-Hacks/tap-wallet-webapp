@@ -8,7 +8,7 @@ import {
 import { Image, Tooltip } from "@nextui-org/react"
 import { getAptos } from "../../../../features"
 import { load } from "../../../../services"
-import { computeDenomination } from "../../../../common"
+import { computeDenomination, computeRaw } from "../../../../common"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline"
 
 export const TokensTab = () => {
@@ -74,7 +74,7 @@ export const TokensTab = () => {
                             } catch (ex) {
                                 console.log(ex)
                             } finally {
-                                balance += offchainBalance ?? 0
+                                balance +=computeRaw(offchainBalance)
                             }
                         }
                         tokenMap[key] = balance

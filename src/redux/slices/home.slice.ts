@@ -44,7 +44,7 @@ const initialState: HomeState = {
             key: "tAptos",
             name: "tAptos",
             symbol: "tAPT",
-            coinType: APTOS_COIN,
+            coinType: "0x0::example::example",
             imageUrl: "/icons/taptos.png",
             balance: 0,
         },

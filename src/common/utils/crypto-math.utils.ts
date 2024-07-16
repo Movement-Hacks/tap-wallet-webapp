@@ -17,7 +17,7 @@ export const computeDenomination = (
     const decimalMultiplier = 10 ** fractionDigits
     const divisor = 10 ** decimals
     const result = amount * decimalMultiplier / divisor
-    return numeral(result / decimalMultiplier).format("0.00000000a")
+    return numeral(result / decimalMultiplier).format("0.00000a")
 }
 
 export const computeRaw = (amount: number, decimals = 8): number => {
