@@ -3,6 +3,7 @@ import { ReactUnityEventParameter } from "react-unity-webgl/distribution/types/r
 import { PlayPageContext } from "../PlayPageProvider"
 import { useAppSelector } from "../../../redux"
 import { save } from "../../../services"
+import { useNavigate } from "react-router-dom"
 
 export enum GameAction {
   Save = "Save",
@@ -10,6 +11,8 @@ export enum GameAction {
 export const useListeners = () => {
     const { unityContext } = useContext(PlayPageContext)!
     const { addEventListener, removeEventListener, sendMessage } = unityContext
+
+    const navigate = useNavigate()
 
     const isKeyless = useAppSelector((state) => state.authReducer.isKeyless)
     const account = useAppSelector((state) => state.authReducer.account)
@@ -55,10 +58,19 @@ export const useListeners = () => {
         [handleSendPayloadAsync]
     )
 
+    const handleBack = useCallback(
+        () => {
+            navigate("/home")
+        },
+        [navigate]
+    )
+
     useEffect(() => {
         addEventListener("SendPayload", handleSendPayload)
+        addEventListener("Back", handleBack)
         return () => {
             removeEventListener("SendPayload", handleSendPayload)
+            removeEventListener("Back", handleBack)
         }
     }, [addEventListener, removeEventListener, handleSendPayload])
 }
