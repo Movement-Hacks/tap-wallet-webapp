@@ -13,7 +13,7 @@ export const App = () => {
     return (
         <ReduxProvider store={store}>
             <NextUIProvider>
-                <div className="container bg-background text-foreground dark">
+                <div className="dark container bg-background text-foreground">
                     <RouterProvider router={router}  />
                     <Toaster />
                     <ConfirmTransactionModal />

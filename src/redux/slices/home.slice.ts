@@ -34,8 +34,8 @@ const initialState: HomeState = {
     tokens: [
         {
             key: "aptos",
-            name: "Aptos",
-            symbol: "APT",
+            name: "Move Coin (Aptos)",
+            symbol: "MOVE",
             coinType: APTOS_COIN,
             imageUrl: "/icons/aptos.svg",
             balance: 0,
