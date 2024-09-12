@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useEffect } from "react"
 import {
     setIsFetchingBalance,
     updateBalances,
@@ -6,14 +6,12 @@ import {
     useAppSelector,
 } from "../../../../redux"
 import { Image, Tooltip } from "@nextui-org/react"
-import { getAptos } from "../../../../features"
-import { load } from "../../../../services"
+import { getMovementAptosBalance } from "../../../../features"
 import { computeDenomination, computeRaw } from "../../../../common"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline"
 
 export const TokensTab = () => {
     const tokens = useAppSelector((state) => state.homeReducer.tokens)
-
     const keylessAccount = useAppSelector(
         (state) => state.authReducer.keylessAccount
     )
@@ -27,7 +25,7 @@ export const TokensTab = () => {
         (state) => state.homeReducer.keys.refreshTokensAndNftsKey
     )
 
-    const getAddress = useCallback(() => {
+    const getAddress = () => {
         if (isKeyless) {
             if (!keylessAccount) return "0x"
             return keylessAccount.accountAddress.toString()
@@ -35,11 +33,12 @@ export const TokensTab = () => {
             if (!account) return "0x"
             return account.accountAddress.toString()
         }
-    }, [isKeyless, keylessAccount, account])
+    }
 
     useEffect(() => {
         if (getAddress() === "0x") return
         const handleEffect = async () => {
+            console.log("called")
             dispatch(
                 setIsFetchingBalance({
                     isFetchingBalance: true,
@@ -47,43 +46,32 @@ export const TokensTab = () => {
             )
             const address = getAddress()
             const tokenMap: Record<string, number> = {}
-            const promises: Array<Promise<void>> = []
-            for (const { key, coinType } of tokens) {
-                const promise = async () => {
-                    let balance = 0
+            console.log(tokens)
+            for (const { key } of tokens) {
+                let balance = 0
+                if (key === "tAptos") {
+                    let offchainBalance = 0
                     try {
-                        balance = await getAptos(network).getAccountCoinAmount({
-                            accountAddress: address,
-                            coinType
-                        })
-                    } catch(ex) {
+                        // const { balance } = await load({
+                        //     input: {
+                        //         address
+                        //     },
+                        //     schema: {
+                        //         balance: true
+                        //     }
+                        // })
+                        offchainBalance = 0
+                    } catch (ex) {
                         console.log(ex)
                     } finally {
-                        if (key === "tAptos") {
-                            let offchainBalance = 0
-                            try {
-                                const { balance } = await load({
-                                    input: {
-                                        address
-                                    },
-                                    schema: {
-                                        balance: true
-                                    }
-                                })
-                                offchainBalance = balance ?? 0
-                            } catch (ex) {
-                                console.log(ex)
-                            } finally {
-                                balance +=computeRaw(offchainBalance)
-                            }
-                        }
-                        tokenMap[key] = balance
+                        balance +=computeRaw(offchainBalance)
                     }
+                } else {
+                    balance = await getMovementAptosBalance(network, address)
                 }
-                promises.push(promise())
+                tokenMap[key] = balance         
             }
-            await Promise.all(promises)
-
+            console.log("called2")
             dispatch(
                 updateBalances({
                     tokenMap,
@@ -96,7 +84,7 @@ export const TokensTab = () => {
             )
         }
         handleEffect()
-    }, [refreshTokensAndNftsKey, dispatch, tokens, getAddress])
+    }, [refreshTokensAndNftsKey, dispatch, tokens, isKeyless, keylessAccount, account])
 
     return (
         <div className="flex flex-col gap-6">

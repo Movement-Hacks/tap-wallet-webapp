@@ -8,7 +8,7 @@ interface ConfigState {
 
 const initialState: ConfigState = {
     darkMode: false,
-    network: Network.DEVNET
+    network: Network.TESTNET
 }
 
 export const configSlice = createSlice({
