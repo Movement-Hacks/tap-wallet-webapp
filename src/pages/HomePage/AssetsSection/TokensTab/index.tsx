@@ -7,8 +7,10 @@ import {
 } from "../../../../redux"
 import { Image, Tooltip } from "@nextui-org/react"
 import { getMovementAptosBalance } from "../../../../features"
+
 import { computeDenomination, computeRaw } from "../../../../common"
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline"
+import { load } from "../../../../services"
 
 export const TokensTab = () => {
     const tokens = useAppSelector((state) => state.homeReducer.tokens)
@@ -48,28 +50,27 @@ export const TokensTab = () => {
             const tokenMap: Record<string, number> = {}
             console.log(tokens)
             for (const { key } of tokens) {
-                let balance = 0
-                if (key === "tAptos") {
-                    let offchainBalance = 0
-                    try {
-                        // const { balance } = await load({
-                        //     input: {
-                        //         address
-                        //     },
-                        //     schema: {
-                        //         balance: true
-                        //     }
-                        // })
-                        offchainBalance = 0
-                    } catch (ex) {
-                        console.log(ex)
-                    } finally {
-                        balance +=computeRaw(offchainBalance)
+                try {
+                    let balance = 0
+                    if (key === "tAptos") {
+                        let offchainBalance = 0
+                        const { balance: _balance } = await load({
+                            input: {
+                                address
+                            },
+                            schema: {
+                                balance: true
+                            }
+                        })
+                        offchainBalance = _balance ?? 0
+                        balance += computeRaw(offchainBalance)
+                    } else {
+                        balance = await getMovementAptosBalance(network, address)
                     }
-                } else {
-                    balance = await getMovementAptosBalance(network, address)
-                }
-                tokenMap[key] = balance         
+                    tokenMap[key] = balance     
+                } catch (ex) {
+                    tokenMap[key] = 0
+                }        
             }
             console.log("called2")
             dispatch(
