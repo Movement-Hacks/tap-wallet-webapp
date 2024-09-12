@@ -70,9 +70,9 @@ export const homeSlice = createSlice({
             const tokenKeys = Object.keys(action.payload.tokenMap)
             for (const key of tokenKeys) {
                 const foundToken = state.tokens.find((token) => token.key === key)
-                if (!foundToken) {
-                    throw new Error(`Token with key ${key} not found.`)
-                }
+                console.log(tokenKeys)
+                console.log(state.tokens)
+                if (!foundToken) throw new Error("Token not found")
                 foundToken.balance = action.payload.tokenMap[key]
             }
         },

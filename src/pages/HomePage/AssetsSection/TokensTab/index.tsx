@@ -70,14 +70,14 @@ export const TokensTab = () => {
                     tokenMap[key] = balance     
                 } catch (ex) {
                     tokenMap[key] = 0
-                }        
+                }    
             }
-            console.log("called2")
             dispatch(
                 updateBalances({
                     tokenMap,
                 })
             )
+            console.log(tokenMap)
             dispatch(
                 setIsFetchingBalance({
                     isFetchingBalance: false,
@@ -86,7 +86,7 @@ export const TokensTab = () => {
         }
         handleEffect()
     }, [refreshTokensAndNftsKey, dispatch, tokens, isKeyless, keylessAccount, account])
-
+    console.log(tokens)
     return (
         <div className="flex flex-col gap-6">
             {tokens.map(({ key, name, symbol, imageUrl, balance }) => (
